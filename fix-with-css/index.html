@@ -1,5 +1,5 @@
 <!--CMPS3141-HCI - AS3-23S1
-Collaborators:
+Collaborators: Francisco Tun (2020152662)
 Date: Sept.22.23
 -->
 <!DOCTYPE html>
@@ -10,6 +10,186 @@ Date: Sept.22.23
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Fix the Web with CSS!</title>
 </head>
+
+	<h1>Learnability</h1>
+	<p>When a users hovers over a button and it changes appearance (the backgroung color) it provides visual
+	   feedback to the user. This feedback is a way of teaching or informing the user that the button is interactive.
+	   The hover effect helps users learn that the button is clickable, enhancing the overall learnability of the users
+	   interface
+	</p>
+
+	<p>On the Panda Security website 
+	<a href="https://accounts.pandasecurity.com/web/Account/Login?ReturnUrl=%2Fweb%2F%3Fwtrealm%3Dhttp
+	s%253A%252F%252Fwww.pandacloudsecurity.com%252FLogin%252F%26wctx%3DWsFedOwinState%253DeD841ggfzfAYbWvS
+	EaEqlbu_0PnNEcHjKocneNZ7U7jH1Sj_KEWXG6CImM3AKIAFZe-jDxjVcFlR6J6vmiQNs3ELPsAGuZPi2C1OPbDrrd4%26wa%3Dwsignin1.0"
+    target="_blank">Panda Security.com!</a>  when the login button is hovered the button stays the same so the
+	user doesnt know if he can click it or not. To the left is a picture of the login button. A hover selector can 
+	be added so that when the user hovers over the login button the login button changes to another color. To the right 
+	is the picture of the login button with the selector added.  
+	<div style="float: left;">
+		<img src="loginNormal.jpg" alt="loginNormal">
+	</div>
+	
+	<div style="float: center;">
+		<img src="loginFixed.png" alt="loginFixed">
+	</div>
+    </p>
+
+<!-- this is the link to the Panda Security Website and below is the code i made for learnability 
+https://accounts.pandasecurity.com/web/Account/Login?ReturnUrl=%2Fweb%2F%3Fwtrealm%3Dhttps%25
+3A%252F%252Fwww.pandacloudsecurity.com%252FLogin%252F%26wctx%3DWsFedOwinState%253DeD841ggfzfAYbWvS
+EaEqlbu_0PnNEcHjKocneNZ7U7jH1Sj_KEWXG6CImM3AKIAFZe-jDxjVcFlR6J6vmiQNs3ELPsAGuZPi2C1OPbDrrd4%26wa%3Dwsignin1.0
+
+here is the code 
+
+(function(){
+    let style = `<style>
+
+/*change your style here*/
+
+.login .form .button:hover {
+background-color: #3e8e41;
+}
+
+</style>`;
+document.head.insertAdjacentHTML("beforeend", style);
+})(); 
+
+-->
+
+
+
+
+
+
+<h1>Efficiency</h1>
+	<p>When users are searching for information, they want to visit sites that are clear to understand so 
+	   the page needs to be clear, organized, and links or buttons have to allow users to move through the 
+	   interface effortlessly. It shoudld also have consistency including layout,color schemes, which should help the
+	   user predict how to interact with the system. 
+	</p>
+
+	<p>On the Public Service site for Belize  
+	<a href="https://www.publicservice.gov.bz/index.php/2015-12-04-22-38-57/ministries-and-departments"
+    target="_blank">Public Service Site of Belize</a> the table that is displayed first is not 
+	clear to understand and the users would loose valuable time to get what they need from the site. First the white rows
+	dont show the edges of the table so it doesnt look like a table. Secondly the columns of the table are not separated 
+	so it can confuse the user as to which information is for which column. Thirdly, the text of the color on the table 
+	is the same as some rows. Lastly, the links as we remember most of them are with blue text but the ones on this site
+	are with green. I overrode css rules so the user could go into the site and get what he wants which in this case would
+	be to visist the website of the governement branch they are looking for without having delays due to the poor layout,
+    color schemes, link, and unclear information. This is the second picture.  	
+	<div>	
+	<img src="originalTable.png" alt="Original Table">
+	</div>	
+	<div>
+	<img src="updatedTable.jpg" alt="Updated Table">
+	</div>
+    </p>
+
+<!-- this is the link to the Panda Security Website and below is the code i made for learnability 
+https://www.publicservice.gov.bz/index.php/2015-12-04-22-38-57/ministries-and-departments
+
+
+here is the code 
+
+(function(){
+    let style = `<style>
+/change your style here/
+
+table {
+    background-color: #c3fdff6e; /* Override the background color */   
+}
+
+table {
+    border-spacing: 2px; /* Add the unit (e.g., pixels) after the numeric value */
+    border-collapse: separate;
+}
+
+.fcitems{
+    color: #030303; /* Override the color property of text in the table */
+}
+
+a {
+    color: #3366CC; /* Override the color property of the links*/
+}
+
+</style>`;
+document.head.insertAdjacentHTML("beforeend", style);
+})();
+
+-->
+
+
+
+
+
+
+
+<h1>Safety</h1>
+	<p>Regarding safety we want the user to access a website where there is error prevention, 
+	   the user can undo actions done, provide error messages, and let the user have control and freedom 
+	   over the website. They shouldn't be afraid of using the wesbite. 
+	</p>
+
+	<p>On the Hackers News Website 
+	<a href="https://news.ycombinator.com/newest"
+    target="_blank">Hackers News Website</a> the navigation bar's links are too congested which can cause 
+	                the user to click something that he didnt want to click. The words are too small so the user 
+					can click on a word thinking that it's something else. Lastly, there is no mouse hover in the
+					navigation bar and the user would have to click the link more than once to get re-directed. 
+					These issues dont allow the user to have control and freedom over the website. You can take a look
+					at the first picture below to identify these problems as well. As a solution I added border spacing, 
+					increased the font size, underlined hyperlinks, and added a mouse over to the links in the navigarion
+					bar. I also set a border around the links in the navigation bar so we can notice the navigation bar 
+					itself. The picture with the improvements is the second one below.
+	<div>	
+	<img src="normalNavigationBar.png" alt="Original Navigation Bar">
+	</div>	
+	<div>
+	<img src="updatedNavigationBar.jpg" alt="Updated Navigation Bar">
+    </div>
+    </p>
+
+<!-- this is the link to the Panda Security Website and below is the code i made for learnability 
+https://news.ycombinator.com/newest
+
+here is the code 
+
+(function(){
+    let style = `<style>
+/*change your style here*/
+
+table {
+    border-spacing: 4px;
+}
+
+a:link {
+    text-decoration: underline;
+}
+
+.pagetop {
+    font-family: Verdana;
+    font-size: 12pt;
+    color: #ffffff;
+px;
+}
+
+.pagetop {
+    border: 3px solid black; /* Set border width and color for table cells */
+  padding: 3px;
+}
+
+.pagetop a:visited,
+.pagetop a:hover {
+    background-color: #555;
+}
+
+</style>`;
+document.head.insertAdjacentHTML("beforeend", style);
+})();
+
+-->
 <body>
 
 </body>
