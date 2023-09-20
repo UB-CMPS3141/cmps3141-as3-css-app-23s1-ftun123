@@ -1,88 +1,88 @@
-import { createApp } from "https://mavue.mavo.io/mavue.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Load the Mavo library and bind the expenses data -->
+        <ma-data v-model="expenses" src="data.json"></ma-data>
 
-globalThis.app = createApp({
-  data: {
-    expenses: [],
-    newExpense: {
-      title: "",
-      amount: 0,
-      payer: "",
-      payee: "",
-      date: "",
-      currency: "BZD"
-    }
-  },
+        <div class="container">
+            <h1>Expense Manager</h1>
 
-  methods: {
-    currencyConvert(from, to, amount) {
-      const rates = {
-        BZD: 1,
-        MXN: 8.73,
-        GTQ: 3.91
-      };
+            <!-- Input fields for adding a new expense -->
+            <div class="expense-input">
+                <label for="expenseTitle">Expense Title:</label>
+                <input type="text" id="expenseTitle" v-model="newExpense.title">
+            </div>
+            <div class="expense-input">
+                <label for="expenseAmount">Expense Amount (BZD):</label>
+                <input type="number" id="expenseAmount" v-model="newExpense.amount">
+            </div>
+            <div class="expense-input">
+                <label for="expensePayer">Payer (N or T):</label>
+                <input type="text" id="expensePayer" v-model="newExpense.payer">
+            </div>
+            <div class="expense-input">
+                <label for="expensePayee">Payee (N or T):</label>
+                <input type="text" id="expensePayee" v-model="newExpense.payee">
+            </div>
+            <div class="expense-input">
+                <label for="expenseDate">Expense Date:</label>
+                <input type="date" id="expenseDate" v-model="newExpense.date">
+            </div>
+            <div class="expense-input">
+                <label for="expenseCurrency">Expense Currency:</label>
+                <select id="expenseCurrency" v-model="newExpense.currency">
+                    <option value="BZD">BZD</option>
+                    <option value="MXN">MXN</option>
+                    <option value="GTQ">GTQ</option>
+                </select>
+            </div>
 
-      return amount * rates[to] / rates[from];
-    },
+            <!-- Button to add the new expense -->
+            <button @click="addExpense">Add Expense</button>
+        </div>
 
-    addExpense() {
-      // Add the new expense to the expenses array
-      this.expenses.push({
-        title: this.newExpense.title,
-        amount: parseFloat(this.newExpense.amount),
-        payer: this.newExpense.payer,
-        payee: this.newExpense.payee,
-        date: this.newExpense.date,
-        currency: this.newExpense.currency
-      });
+        <!-- Display the list of expenses -->
+        <div class="container">
+            <h2>Expenses List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Expense Title</th>
+                        <th>Amount</th>
+                        <th>Currency</th>
+                        <th>Payer</th>
+                        <th>Payee</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(expense, index) in expenses" :key="index">
+                        <td>{{ expense.title }}</td>
+                        <td>{{ expense.amount }}</td>
+                        <td>{{ expense.currency }}</td>
+                        <td>{{ expense.payer }}</td>
+                        <td>{{ expense.payee }}</td>
+                        <td>{{ expense.date }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-      // Clear the newExpense object for the next entry
-      this.newExpense = {
-        title: "",
-        amount: 0,
-        payer: "",
-        payee: "",
-        date: "",
-        currency: "BZD"
-      };
-    },
+        <!-- Total balance calculation -->
+        <div class="container">
+            <h2>Total Balance</h2>
+            <p>Total Balance in BZD: {{ total_balance }} BZD</p>
+        </div>
+    </div>
 
-    calculateBalances() {
-      let balances = {};
-      
-      // Initialize balances for Trinity (T) and Neo (N) to 0
-      balances.T = 0;
-      balances.N = 0;
-      
-      for (let expense of this.expenses) {
-        let convertedAmount = this.currencyConvert(
-          expense.currency,
-          "BZD",
-          expense.amount
-        );
-        
-        if (expense.payer === "T") {
-          balances.T += convertedAmount;
-        } else if (expense.payer === "N") {
-          balances.N += convertedAmount;
-        }
-        
-        if (expense.payee === "T") {
-          balances.T -= convertedAmount;
-        } else if (expense.payee === "N") {
-          balances.N -= convertedAmount;
-        }
-      }
-      
-      return balances;
-    }
-  },
-
-  computed: {
-    total_balance() {
-      const balances = this.calculateBalances();
-      const trinityBalance = balances.T.toFixed(2);
-      const neoBalance = balances.N.toFixed(2);
-      return `Trinity's Balance: ${trinityBalance} BZD, Neo's Balance: ${neoBalance} BZD`;
-    }
-  }
-}, "#app");
+    <script src="https://mavue.mavo.io/mavue.js"></script>
+    <script src="index.js" type="module"></script>
+</body>
+</html>
