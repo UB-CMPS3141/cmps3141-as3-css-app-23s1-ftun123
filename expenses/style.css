@@ -41,7 +41,8 @@ table {
   border: 1px solid #ddd;
 }
 
-table th, table td {
+table th,
+table td {
   padding: 12px;
   text-align: center;
   border: 1px solid #ddd;
@@ -63,4 +64,68 @@ table tbody tr:hover {
   transition: background-color 0.2s, transform 0.2s;
 }
 
-/* Add more styles as needed for your specific design */
+/* Additional styles for Trinity's expenses table */
+#trinity-table {
+  margin-top: 40px;
+  border: 1px solid #ddd;
+}
+
+#trinity-table th {
+  background-color: #009900;
+  color: #fff;
+  font-weight: bold;
+}
+
+#trinity-table tbody tr:nth-child(even) {
+  background-color: #d9ffd9;
+}
+
+#trinity-table tbody tr:hover {
+  background-color: #c6f7c6;
+  transform: scale(1.01);
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+/* Additional styles for Neo's expenses table */
+#neo-table {
+  margin-top: 40px;
+  border: 1px solid #ddd;
+}
+
+#neo-table th {
+  background-color: #FF5733;
+  color: #fff;
+  font-weight: bold;
+}
+
+#neo-table tbody tr:nth-child(even) {
+  background-color: #ffd9d9;
+}
+
+#neo-table tbody tr:hover {
+  background-color: #ffc6c6;
+  transform: scale(1.01);
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+/* Additional styles for Joint expenses table */
+#joint-table {
+  margin-top: 40px;
+  border: 1px solid #ddd;
+}
+
+#joint-table th {
+  background-color: #FFC733;
+  color: #fff;
+  font-weight: bold;
+}
+
+#joint-table tbody tr:nth-child(even) {
+  background-color: #fff7d9;
+}
+
+#joint-table tbody tr:hover {
+  background-color: #ffedc6;
+  transform: scale(1.01);
+  transition: background-color 0.2s, transform 0.2s;
+}
