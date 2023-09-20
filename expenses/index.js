@@ -25,17 +25,22 @@ globalThis.app = createApp({
     },
 
     addExpense() {
-      // Add the new expense to the expenses array
+      const convertedAmount = this.currencyConvert(
+        this.newExpense.currency,
+        "BZD",
+        parseFloat(this.newExpense.amount)
+      );
+
       this.expenses.push({
         title: this.newExpense.title,
-        amount: parseFloat(this.newExpense.amount),
+        amount: this.newExpense.amount,
         payer: this.newExpense.payer,
         payee: this.newExpense.payee,
         date: this.newExpense.date,
-        currency: this.newExpense.currency
+        currency: this.newExpense.currency,
+        convertedAmount: convertedAmount.toFixed(2) + " BZD"
       });
 
-      // Clear the newExpense object for the next entry
       this.newExpense = {
         title: "",
         amount: 0,
@@ -44,45 +49,22 @@ globalThis.app = createApp({
         date: "",
         currency: "BZD"
       };
-    },
-
-    calculateBalances() {
-      let balances = {};
-      
-      // Initialize balances for Trinity (T) and Neo (N) to 0
-      balances.T = 0;
-      balances.N = 0;
-      
-      for (let expense of this.expenses) {
-        let convertedAmount = this.currencyConvert(
-          expense.currency,
-          "BZD",
-          expense.amount
-        );
-        
-        if (expense.payer === "T") {
-          balances.T += convertedAmount;
-        } else if (expense.payer === "N") {
-          balances.N += convertedAmount;
-        }
-        
-        if (expense.payee === "T") {
-          balances.T -= convertedAmount;
-        } else if (expense.payee === "N") {
-          balances.N -= convertedAmount;
-        }
-      }
-      
-      return balances;
     }
   },
 
   computed: {
     total_balance() {
-      const balances = this.calculateBalances();
-      const trinityBalance = balances.T.toFixed(2);
-      const neoBalance = balances.N.toFixed(2);
-      return `Trinity's Balance: ${trinityBalance} BZD, Neo's Balance: ${neoBalance} BZD`;
+      let totalBalance = 0;
+
+      for (let expense of this.expenses) {
+        if (expense.currency === "BZD") {
+          totalBalance += parseFloat(expense.amount);
+        } else {
+          totalBalance += parseFloat(expense.convertedAmount);
+        }
+      }
+
+      return `Total Balance in BZD: ${totalBalance.toFixed(2)} BZD`;
     }
   }
 }, "#app");
