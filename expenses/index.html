@@ -8,8 +8,8 @@
 </head>
 <body>
     <div id="app">
-        <!-- Load the Mavo library and bind the expenses data from GitHub -->
-        <ma-data v-model="expenses" src="https://github.com/UB-CMPS3141/cmps3141-as3-css-app-23s1-ftun123/blob/main/expenses/index.html"></ma-data>
+        <!-- Load the Mavo library and bind the expenses data -->
+        <ma-data v-model="expenses" src="https://raw.githubusercontent.com/UB-CMPS3141/cmps3141-as3-css-app-23s1-ftun123/main/expenses/data.json"></ma-data>
 
         <div class="container">
             <h1>Expense Manager</h1>
@@ -48,9 +48,9 @@
             <button @click="addExpense">Add Expense</button>
         </div>
 
-        <!-- Display the list of expenses -->
+        <!-- Trinity's Expenses Table -->
         <div class="container">
-            <h2>Expenses List</h2>
+            <h2>Trinity's Expenses</h2>
             <table>
                 <thead>
                     <tr>
@@ -63,7 +63,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(expense, index) in expenses" :key="index">
+                    <tr v-for="(expense, index) in trinityExpenses" :key="index">
                         <td>{{ expense.title }}</td>
                         <td>{{ expense.amount }}</td>
                         <td>{{ expense.currency }}</td>
@@ -75,10 +75,66 @@
             </table>
         </div>
 
-        <!-- Total balance calculation -->
+        <!-- Neo's Expenses Table -->
         <div class="container">
-            <h2>Total Balance</h2>
-            <p>Total Balance in BZD: {{ total_balance }} BZD</p>
+            <h2>Neo's Expenses</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Expense Title</th>
+                        <th>Amount</th>
+                        <th>Currency</th>
+                        <th>Payer</th>
+                        <th>Payee</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(expense, index) in neoExpenses" :key="index">
+                        <td>{{ expense.title }}</td>
+                        <td>{{ expense.amount }}</td>
+                        <td>{{ expense.currency }}</td>
+                        <td>{{ expense.payer }}</td>
+                        <td>{{ expense.payee }}</td>
+                        <td>{{ expense.date }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Joint Expenses Table -->
+        <div class="container">
+            <h2>Joint Expenses</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Expense Title</th>
+                        <th>Amount</th>
+                        <th>Currency</th>
+                        <th>Payer</th>
+                        <th>Payee</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(expense, index) in jointExpenses" :key="index">
+                        <td>{{ expense.title }}</td>
+                        <td>{{ expense.amount }}</td>
+                        <td>{{ expense.currency }}</td>
+                        <td>{{ expense.payer }}</td>
+                        <td>{{ expense.payee }}</td>
+                        <td>{{ expense.date }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Total balance calculations -->
+        <div class="container">
+            <h2>Total Balances</h2>
+            <p>Trinity's Balance: {{ trinity_balance }} BZD</p>
+            <p>Neo's Balance: {{ neo_balance }} BZD</p>
+            <p>Joint Balance: {{ joint_balance }} BZD</p>
         </div>
     </div>
 
