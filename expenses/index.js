@@ -1,70 +1,66 @@
-import { createApp } from "https://mavue.mavo.io/mavue.js";
+/* User-friendly table styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
 
-globalThis.app = createApp({
-  data: {
-    expenses: [],
-    newExpense: {
-      title: "",
-      amount: 0,
-      payer: "",
-      payee: "",
-      date: "",
-      currency: "BZD"
-    }
-  },
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
 
-  methods: {
-    currencyConvert(from, to, amount) {
-      const rates = {
-        BZD: 1,
-        MXN: 8.73,
-        GTQ: 3.91
-      };
+h1 {
+  text-align: center;
+  color: #333;
+}
 
-      return amount * rates[to] / rates[from];
-    },
+h2 {
+  color: #333;
+}
 
-    addExpense() {
-      const convertedAmount = this.currencyConvert(
-        this.newExpense.currency,
-        "BZD",
-        parseFloat(this.newExpense.amount)
-      );
+.expense-input {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
-      this.expenses.push({
-        title: this.newExpense.title,
-        amount: this.newExpense.amount,
-        payer: this.newExpense.payer,
-        payee: this.newExpense.payee,
-        date: this.newExpense.date,
-        currency: this.newExpense.currency,
-        convertedAmount: convertedAmount.toFixed(2) + " BZD"
-      });
+.expense-input label {
+  flex: 1;
+  margin-right: 10px;
+}
 
-      this.newExpense = {
-        title: "",
-        amount: 0,
-        payer: "",
-        payee: "",
-        date: "",
-        currency: "BZD"
-      };
-    }
-  },
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+}
 
-  computed: {
-    total_balance() {
-      let totalBalance = 0;
+table th, table td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
 
-      for (let expense of this.expenses) {
-        if (expense.currency === "BZD") {
-          totalBalance += parseFloat(expense.amount);
-        } else {
-          totalBalance += parseFloat(expense.convertedAmount);
-        }
-      }
+table th {
+  background-color: #007BFF;
+  color: #fff;
+  font-weight: bold;
+}
 
-      return `Total Balance in BZD: ${totalBalance.toFixed(2)} BZD`;
-    }
-  }
-}, "#app");
+table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tbody tr:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.01);
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+/* Add more styles as needed for your specific design */
