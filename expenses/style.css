@@ -1,4 +1,4 @@
-/* User-friendly table styles */
+/* Reset some default styles */
 body {
   font-family: Arial, sans-serif;
   background-color: #f5f5f5;
@@ -6,6 +6,7 @@ body {
   padding: 0;
 }
 
+/* Common container styles */
 .container {
   max-width: 800px;
   margin: 20px auto;
@@ -14,6 +15,7 @@ body {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
+/* Headings styles */
 h1 {
   text-align: center;
   color: #333;
@@ -23,6 +25,7 @@ h2 {
   color: #333;
 }
 
+/* Styles for input fields */
 .expense-input {
   display: flex;
   align-items: center;
@@ -34,6 +37,7 @@ h2 {
   margin-right: 10px;
 }
 
+/* Table styles */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -128,4 +132,18 @@ table tbody tr:hover {
   background-color: #ffedc6;
   transform: scale(1.01);
   transition: background-color 0.2s, transform 0.2s;
+}
+
+/* Styles for displaying who owes whom */
+.who-owes {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.who-owes span {
+  color: #007BFF;
+}
+
+.who-owes p {
+  margin: 5px 0;
 }
