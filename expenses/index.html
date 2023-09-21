@@ -8,9 +8,6 @@
 </head>
 <body>
     <div id="app">
-        <!-- Load the Mavo library and bind the expenses data -->
-        <ma-data v-model="expenses" src="https://raw.githubusercontent.com/UB-CMPS3141/cmps3141-as3-css-app-23s1-ftun123/main/expenses/data.json"></ma-data>
-
         <div class="container">
             <h1>Expense Manager</h1>
 
@@ -24,11 +21,11 @@
                 <input type="number" id="expenseAmount" v-model="newExpense.amount">
             </div>
             <div class="expense-input">
-                <label for="expensePayer">Payer (N or T):</label>
+                <label for="expensePayer">Payer (N, T, or Joint):</label>
                 <input type="text" id="expensePayer" v-model="newExpense.payer">
             </div>
             <div class="expense-input">
-                <label for="expensePayee">Payee (N or T):</label>
+                <label for="expensePayee">Payee (N, T, or Joint):</label>
                 <input type="text" id="expensePayee" v-model="newExpense.payee">
             </div>
             <div class="expense-input">
@@ -63,7 +60,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(expense, index) in trinityExpenses" :key="index">
+                    <tr v-for="expense in trinityExpenses" :key="expense.title">
                         <td>{{ expense.title }}</td>
                         <td>{{ expense.amount }}</td>
                         <td>{{ expense.currency }}</td>
@@ -90,7 +87,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(expense, index) in neoExpenses" :key="index">
+                    <tr v-for="expense in neoExpenses" :key="expense.title">
                         <td>{{ expense.title }}</td>
                         <td>{{ expense.amount }}</td>
                         <td>{{ expense.currency }}</td>
@@ -117,7 +114,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(expense, index) in jointExpenses" :key="index">
+                    <tr v-for="expense in jointExpenses" :key="expense.title">
                         <td>{{ expense.title }}</td>
                         <td>{{ expense.amount }}</td>
                         <td>{{ expense.currency }}</td>
@@ -132,9 +129,11 @@
         <!-- Total balance calculations -->
         <div class="container">
             <h2>Total Balances</h2>
-            <p>Trinity's Balance: {{ trinity_balance }} BZD</p>
-            <p>Neo's Balance: {{ neo_balance }} BZD</p>
-            <p>Joint Balance: {{ joint_balance }} BZD</p>
+            <p>Trinity's Total Balance: {{ trinity_balance }} BZD</p>
+            <p>Neo's Total Balance: {{ neo_balance }} BZD</p>
+            <p>Joint Total Balance: {{ joint_balance }} BZD</p>
+            <p v-if="neo_owes_trinity > 0">From Neos total balance he owes Trinity: {{ neo_owes_trinity }} BZD</p>
+            <p v-if="trinity_owes_neo > 0">From Trinity total balance she owes Neo: {{ trinity_owes_neo }} BZD</p>
         </div>
     </div>
 
