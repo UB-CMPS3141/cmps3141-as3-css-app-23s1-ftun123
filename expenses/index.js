@@ -2,7 +2,7 @@ import { createApp } from "https://mavue.mavo.io/mavue.js";
 
 globalThis.app = createApp({
   data: {
-    expenses: [], // Initialize the expenses array
+    expenses: [], // Initialize the expenses array with your data
     newExpense: {
       title: "",
       amount: 0,
@@ -69,12 +69,38 @@ globalThis.app = createApp({
           balances.N += convertedAmount;
         }
 
-        if (expense.payer !== "T" && expense.payee !== "T" && expense.payer !== "N" && expense.payee !== "N") {
+        if (expense.payer === "Joint" || expense.payee === "Joint") {
           balances.Joint += convertedAmount;
         }
       }
 
       return balances;
+    },
+
+    calculateOwes() {
+      let neo_owes_trinity = 0;
+      let trinity_owes_neo = 0;
+
+      for (let expense of this.expenses) {
+        let convertedAmount = this.currencyConvert(
+          expense.currency,
+          "BZD",
+          expense.amount
+        );
+
+        if (expense.payer === "T" && expense.payee === "N") {
+          neo_owes_trinity += convertedAmount;
+        }
+
+        if (expense.payer === "N" && expense.payee === "T") {
+          trinity_owes_neo += convertedAmount;
+        }
+      }
+
+      return {
+        neo_owes_trinity: neo_owes_trinity.toFixed(2),
+        trinity_owes_neo: trinity_owes_neo.toFixed(2)
+      };
     }
   },
 
@@ -95,6 +121,16 @@ globalThis.app = createApp({
       return balances.Joint.toFixed(2);
     },
 
+    neo_owes_trinity() {
+      const owes = this.calculateOwes();
+      return owes.neo_owes_trinity;
+    },
+
+    trinity_owes_neo() {
+      const owes = this.calculateOwes();
+      return owes.trinity_owes_neo;
+    },
+
     // Filter expenses into Trinity's, Neo's, and Joint expenses
     trinityExpenses() {
       return this.expenses.filter(
@@ -110,40 +146,8 @@ globalThis.app = createApp({
 
     jointExpenses() {
       return this.expenses.filter(
-        (expense) =>
-          expense.payer !== "T" &&
-          expense.payee !== "T" &&
-          expense.payer !== "N" &&
-          expense.payee !== "N"
+        (expense) => expense.payer === "Joint" || expense.payee === "Joint"
       );
     }
-  },
-
-  created() {
-    // Load data from your JSON file here and populate the expenses array
-    fetch("https://raw.githubusercontent.com/UB-CMPS3141/cmps3141-as3-css-app-23s1-ftun123/main/expenses/data.json")
-      .then((response) => response.json())
-      .then((data) => {
-        // Assuming your JSON data is an array of objects with properties like "title," "trinity_paid," and "neo_paid"
-        // Convert your JSON data to match the desired structure
-        const convertedData = data.map((item) => ({
-          title: item.title,
-          amount:
-            (item.trinity_paid && item.neo_paid) ||
-            (item.neo_paid_for_trinity && item.neo_paid) ||
-            0, // Adjust the logic based on your data structure
-          payer: item.trinity_paid
-            ? "T"
-            : item.neo_paid_for_trinity
-            ? "N"
-            : "N", // Adjust the logic based on your data structure
-          payee: item.neo_paid ? "N" : "T", // Adjust the logic based on your data structure
-          date: "", // Add the appropriate date property if available in your data
-          currency: "BZD" // Adjust the currency if needed
-        }));
-
-        this.expenses = convertedData;
-      })
-      .catch((error) => console.error("Error loading JSON data:", error));
   }
 }, "#app");
