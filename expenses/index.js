@@ -9,8 +9,8 @@ globalThis.app = createApp({
       payer: "",
       payee: "",
       date: "",
-      currency: "BZD"
-    }
+      currency: "BZD",
+    },
   },
 
   methods: {
@@ -18,7 +18,7 @@ globalThis.app = createApp({
       const rates = {
         BZD: 1,
         MXN: 8.73,
-        GTQ: 3.91
+        GTQ: 3.91,
       };
 
       return amount * rates[to] / rates[from];
@@ -32,7 +32,7 @@ globalThis.app = createApp({
         payer: this.newExpense.payer,
         payee: this.newExpense.payee,
         date: this.newExpense.date,
-        currency: this.newExpense.currency
+        currency: this.newExpense.currency,
       });
 
       // Clear the newExpense object for the next entry
@@ -42,17 +42,16 @@ globalThis.app = createApp({
         payer: "",
         payee: "",
         date: "",
-        currency: "BZD"
+        currency: "BZD",
       };
     },
 
     calculateBalances() {
-      let balances = {};
-
-      // Initialize balances for Trinity (T), Neo (N), and Joint to 0
-      balances.T = 0;
-      balances.N = 0;
-      balances.Joint = 0;
+      let balances = {
+        T: 0,
+        N: 0,
+        Joint: 0,
+      };
 
       for (let expense of this.expenses) {
         let convertedAmount = this.currencyConvert(
@@ -80,6 +79,10 @@ globalThis.app = createApp({
     calculateOwes() {
       let neo_owes_trinity = 0;
       let trinity_owes_neo = 0;
+      let joint_owes_trinity = 0;
+      let joint_owes_neo = 0;
+      let neo_pays_for_joint = 0;
+      let trinity_pays_for_joint = 0; // Initialize the variable for Trinity
 
       for (let expense of this.expenses) {
         let convertedAmount = this.currencyConvert(
@@ -95,13 +98,33 @@ globalThis.app = createApp({
         if (expense.payer === "N" && expense.payee === "T") {
           trinity_owes_neo += convertedAmount;
         }
+
+        if (expense.payer === "Joint" && expense.payee === "T") {
+          joint_owes_trinity += convertedAmount;
+        }
+
+        if (expense.payer === "Joint" && expense.payee === "N") {
+          joint_owes_neo += convertedAmount;
+        }
+
+        if (expense.payer === "N" && expense.payee === "Joint") {
+          neo_pays_for_joint += convertedAmount;
+        }
+
+        if (expense.payer === "T" && expense.payee === "Joint") {
+          trinity_pays_for_joint += convertedAmount; // Calculate Trinity's payment for Joint
+        }
       }
 
       return {
         neo_owes_trinity: neo_owes_trinity.toFixed(2),
-        trinity_owes_neo: trinity_owes_neo.toFixed(2)
+        trinity_owes_neo: trinity_owes_neo.toFixed(2),
+        joint_owes_trinity: joint_owes_trinity.toFixed(2),
+        joint_owes_neo: joint_owes_neo.toFixed(2),
+        neo_pays_for_joint: neo_pays_for_joint.toFixed(2),
+        trinity_pays_for_joint: trinity_pays_for_joint.toFixed(2), // Include this in the return object for Trinity
       };
-    }
+    },
   },
 
   computed: {
@@ -131,6 +154,26 @@ globalThis.app = createApp({
       return owes.trinity_owes_neo;
     },
 
+    joint_owes_trinity() {
+      const owes = this.calculateOwes();
+      return owes.joint_owes_trinity;
+    },
+
+    joint_owes_neo() {
+      const owes = this.calculateOwes();
+      return owes.joint_owes_neo;
+    },
+
+    neo_pays_for_joint() {
+      const owes = this.calculateOwes();
+      return owes.neo_pays_for_joint;
+    },
+
+    trinity_pays_for_joint() { // Add this computed property for Trinity
+      const owes = this.calculateOwes();
+      return owes.trinity_pays_for_joint;
+    },
+
     // Filter expenses into Trinity's, Neo's, and Joint expenses
     trinityExpenses() {
       return this.expenses.filter(
@@ -148,6 +191,6 @@ globalThis.app = createApp({
       return this.expenses.filter(
         (expense) => expense.payer === "Joint" || expense.payee === "Joint"
       );
-    }
-  }
+    },
+  },
 }, "#app");
