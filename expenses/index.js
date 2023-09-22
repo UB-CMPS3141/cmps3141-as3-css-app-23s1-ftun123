@@ -21,7 +21,7 @@ globalThis.app = createApp({
         GTQ: 3.91,
       };
 
-      return amount * rates[to] / rates[from];
+      return (amount * rates[to]) / rates[from];
     },
 
     addExpense() {
@@ -46,6 +46,21 @@ globalThis.app = createApp({
       };
     },
 
+    // New method to apply table styles
+    applyTableStyles(tableId) {
+      const table = document.getElementById(tableId);
+
+      if (table) {
+        table.classList.add("expense-table"); // Apply table class
+        table.addEventListener("mouseover", function () {
+          this.classList.add("table-hover");
+        });
+        table.addEventListener("mouseout", function () {
+          this.classList.remove("table-hover");
+        });
+      }
+    },
+
     // New method to fetch expenses data from the JSON file
     async fetchExpensesData() {
       try {
@@ -59,6 +74,11 @@ globalThis.app = createApp({
 
         const jsonData = await response.json();
         this.expenses = jsonData; // Update the expenses array with fetched data
+
+        // Apply table styles after fetching data
+        this.applyTableStyles("trinity-table");
+        this.applyTableStyles("neo-table");
+        this.applyTableStyles("joint-table");
       } catch (error) {
         console.error("Error fetching data:", error);
       }
