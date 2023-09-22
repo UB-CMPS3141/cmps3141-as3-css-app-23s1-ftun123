@@ -2,7 +2,7 @@ import { createApp } from "https://mavue.mavo.io/mavue.js";
 
 globalThis.app = createApp({
   data: {
-    expenses: [], // Initialize the expenses array with your data
+    expenses: [], // Initialize the expenses array as empty
     newExpense: {
       title: "",
       amount: 0,
@@ -46,6 +46,24 @@ globalThis.app = createApp({
       };
     },
 
+    // New method to fetch expenses data from the JSON file
+    async fetchExpensesData() {
+      try {
+        const response = await fetch(
+          "https://raw.githubusercontent.com/UB-CMPS3141/cmps3141-as3-css-app-23s1-ftun123/main/expenses/data.json"
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch data.");
+        }
+
+        const jsonData = await response.json();
+        this.expenses = jsonData; // Update the expenses array with fetched data
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    },
+
     calculateBalances() {
       let balances = {
         T: 0,
@@ -82,7 +100,7 @@ globalThis.app = createApp({
       let joint_owes_trinity = 0;
       let joint_owes_neo = 0;
       let neo_pays_for_joint = 0;
-      let trinity_pays_for_joint = 0; // Initialize the variable for Trinity
+      let trinity_pays_for_joint = 0;
 
       for (let expense of this.expenses) {
         let convertedAmount = this.currencyConvert(
@@ -112,7 +130,7 @@ globalThis.app = createApp({
         }
 
         if (expense.payer === "T" && expense.payee === "Joint") {
-          trinity_pays_for_joint += convertedAmount; // Calculate Trinity's payment for Joint
+          trinity_pays_for_joint += convertedAmount;
         }
       }
 
@@ -122,7 +140,7 @@ globalThis.app = createApp({
         joint_owes_trinity: joint_owes_trinity.toFixed(2),
         joint_owes_neo: joint_owes_neo.toFixed(2),
         neo_pays_for_joint: neo_pays_for_joint.toFixed(2),
-        trinity_pays_for_joint: trinity_pays_for_joint.toFixed(2), // Include this in the return object for Trinity
+        trinity_pays_for_joint: trinity_pays_for_joint.toFixed(2),
       };
     },
   },
@@ -169,7 +187,7 @@ globalThis.app = createApp({
       return owes.neo_pays_for_joint;
     },
 
-    trinity_pays_for_joint() { // Add this computed property for Trinity
+    trinity_pays_for_joint() {
       const owes = this.calculateOwes();
       return owes.trinity_pays_for_joint;
     },
@@ -192,5 +210,10 @@ globalThis.app = createApp({
         (expense) => expense.payer === "Joint" || expense.payee === "Joint"
       );
     },
+  },
+
+  mounted() {
+    // Fetch expenses data when the app is mounted
+    this.fetchExpensesData();
   },
 }, "#app");
