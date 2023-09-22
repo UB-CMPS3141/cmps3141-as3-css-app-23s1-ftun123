@@ -48,7 +48,7 @@
         <!-- Trinity's Expenses Table -->
         <div class="container">
             <h2>Trinity's Expenses</h2>
-            <table>
+            <table id="trinity-table">
                 <thead>
                     <tr>
                         <th>Expense Title</th>
@@ -75,7 +75,7 @@
         <!-- Neo's Expenses Table -->
         <div class="container">
             <h2>Neo's Expenses</h2>
-            <table>
+            <table id="neo-table">
                 <thead>
                     <tr>
                         <th>Expense Title</th>
@@ -102,7 +102,7 @@
         <!-- Joint's Expenses Table -->
         <div class="container">
             <h2>Joint's Expenses</h2>
-            <table>
+            <table id="joint-table">
                 <thead>
                     <tr>
                         <th>Expense Title</th>
@@ -126,18 +126,17 @@
             </table>
         </div>
 
-    <!-- Total balance calculations -->
-<div class="container">
-    <h2>Total Balances</h2>
-    <p>Trinity's Total Balance: {{ trinity_balance }} BZD</p>
-    <p>Neo's Total Balance: {{ neo_balance }} BZD</p>
-    <p>Joint's Total Balance: {{ joint_balance }} BZD</p>
-    <p v-if="neo_owes_trinity > 0">From Neo's total balance, he owes Trinity: {{ neo_owes_trinity }} BZD</p>
-    <p v-if="trinity_owes_neo > 0">From Trinity's total balance, she owes Neo: {{ trinity_owes_neo }} BZD</p>
-    <p v-if="trinity_pays_for_joint > 0">From Joint's total balance, joint owes Trinity: {{ trinity_pays_for_joint }} BZD</p>
-    <p v-if="neo_pays_for_joint > 0">From Joint's total balance, joint owes Neo: {{ neo_pays_for_joint }} BZD</p>
-  </div>
-    
+        <!-- Total balance calculations -->
+        <div class="container">
+            <h2>Total Balances</h2>
+            <p>Trinity's Total Balance: {{ trinity_balance }} BZD</p>
+            <p>Neo's Total Balance: {{ neo_balance }} BZD</p>
+            <p>Joint's Total Balance: {{ joint_balance }} BZD</p>
+            <p v-if="neo_owes_trinity > 0">From Neo's total balance, he owes Trinity: {{ neo_owes_trinity }} BZD</p>
+            <p v-if="trinity_owes_neo > 0">From Trinity's total balance, she owes Neo: {{ trinity_owes_neo }} BZD</p>
+            <p v-if="trinity_pays_for_joint > 0">From Joint's total balance, joint owes Trinity: {{ trinity_pays_for_joint }} BZD</p>
+            <p v-if="neo_pays_for_joint > 0">From Joint's total balance, joint owes Neo: {{ neo_pays_for_joint }} BZD</p>
+        </div>
     </div>
     <script src="https://mavue.mavo.io/mavue.js"></script>
     <script src="index.js" type="module"></script>
