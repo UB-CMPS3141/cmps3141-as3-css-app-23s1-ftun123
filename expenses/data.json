@@ -106,15 +106,6 @@
   },
 
   {
-    "title": "Rent October",
-    "amount": 800,
-    "payer": "Joint",
-    "payee": "Joint",
-    "date": "2023-08-10",
-    "currency": "MXN"
-  }, 
-
-  {
     "title": "Rent November",
     "amount": 25.0,
     "payer": "Joint",
