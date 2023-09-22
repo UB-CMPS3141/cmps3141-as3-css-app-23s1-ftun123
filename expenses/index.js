@@ -237,3 +237,4 @@ globalThis.app = createApp({
     this.fetchExpensesData();
   },
 }, "#app");
+
