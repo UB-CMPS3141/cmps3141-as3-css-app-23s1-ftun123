@@ -22,5 +22,105 @@
     "payee": "T",
     "date": "2023-09-19",
     "currency": "GTQ"
+  },
+
+  {
+    "title": "Rent",
+    "amount": 25.0,
+    "payer": "T",
+    "payee": "T",
+    "date": "2023-09-1",
+    "currency": "GTQ"
+  },
+
+  {
+    "title": "Locksmith",
+    "amount": 200,
+    "payer": "N",
+    "payee": "N",
+    "date": "2023-09-2",
+    "currency": "MXN"
+  },
+
+  {
+    "title": "Joint Credit Card",
+    "amount": 2283,
+    "payer": "T",
+    "payee": "Joint Credit Card",
+    "date": "2023-09-3",
+    "currency": "MXN"
+  },
+
+  {
+    "title": "Cleaner",
+    "amount": 200,
+    "payer": "T",
+    "payee": "T",
+    "date": "2023-09-4",
+    "currency": "BZ"
+  },
+
+  {
+    "title": "Trinity Laptop Repair",
+    "amount": 952,
+    "payer": "N",
+    "payee": "T",
+    "date": "2023-09-5",
+    "currency": "GTQ"
+  },
+
+  {
+    "title": "Trinity Implant Payment 2",
+    "amount": 830,
+    "payer": "N",
+    "payee": "T",
+    "date": "2023-09-6",
+    "currency": "MXN"
+  },
+
+  {
+    "title": "Trinity New Boots",
+    "amount": 200,
+    "payer": "T",
+    "payee": "T",
+    "date": "2023-09-7",
+    "currency": "BZ"
+  },
+
+  {
+    "title": "Neo New Boots",
+    "amount": 56,
+    "payer": "N",
+    "payee": "N",
+    "date": "2023-09-8",
+    "currency": "BZ"
+  },
+
+  {
+    "title": "Neo New sunglasses deposit",
+    "amount": 238,
+    "payer": "N",
+    "payee": "T",
+    "date": "2023-09-9",
+    "currency": "MXN"
+  },
+
+  {
+    "title": "Rent October",
+    "amount": 800,
+    "payer": "Joint",
+    "payee": "Joint",
+    "date": "2023-08-10",
+    "currency": "MXN"
+  }, 
+
+  {
+    "title": "Rent November",
+    "amount": 25.0,
+    "payer": "Joint",
+    "payee": "Joint",
+    "date": "2023-09-11",
+    "currency": "MXN"
   }
+
 ]
