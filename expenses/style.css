@@ -68,10 +68,10 @@ table tbody tr:hover {
   transition: background-color 0.2s, transform 0.2s;
 }
 
-/* Additional styles for Trinity's expenses table */
+/* Styles for Trinity's expenses table */
 #trinity-table {
   margin-top: 40px;
-  border: 1px solid #ddd;
+  border: 1px solid #009900;
 }
 
 #trinity-table th {
@@ -90,10 +90,10 @@ table tbody tr:hover {
   transition: background-color 0.2s, transform 0.2s;
 }
 
-/* Additional styles for Neo's expenses table */
+/* Styles for Neo's expenses table */
 #neo-table {
   margin-top: 40px;
-  border: 1px solid #ddd;
+  border: 1px solid #FF5733;
 }
 
 #neo-table th {
@@ -112,10 +112,10 @@ table tbody tr:hover {
   transition: background-color 0.2s, transform 0.2s;
 }
 
-/* Additional styles for Joint expenses table */
+/* Styles for Joint's expenses table */
 #joint-table {
   margin-top: 40px;
-  border: 1px solid #ddd;
+  border: 1px solid #FFC733;
 }
 
 #joint-table th {
