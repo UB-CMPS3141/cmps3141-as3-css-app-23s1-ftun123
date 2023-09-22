@@ -68,10 +68,10 @@ table tbody tr:hover {
   transition: background-color 0.2s, transform 0.2s;
 }
 
-/* Styles for Trinity's expenses table */
+/* Additional styles for Trinity's expenses table */
 #trinity-table {
   margin-top: 40px;
-  border: 1px solid #009900;
+  border: 1px solid #ddd;
 }
 
 #trinity-table th {
@@ -86,14 +86,14 @@ table tbody tr:hover {
 
 #trinity-table tbody tr:hover {
   background-color: #c6f7c6;
-  transform: scale(1.01);
-  transition: background-color 0.2s, transform 0.2s;
+  transform: none; /* Reset hover effect */
+  transition: none; /* Disable hover effect transition */
 }
 
-/* Styles for Neo's expenses table */
+/* Additional styles for Neo's expenses table */
 #neo-table {
   margin-top: 40px;
-  border: 1px solid #FF5733;
+  border: 1px solid #ddd;
 }
 
 #neo-table th {
@@ -108,14 +108,14 @@ table tbody tr:hover {
 
 #neo-table tbody tr:hover {
   background-color: #ffc6c6;
-  transform: scale(1.01);
-  transition: background-color 0.2s, transform 0.2s;
+  transform: none; /* Reset hover effect */
+  transition: none; /* Disable hover effect transition */
 }
 
-/* Styles for Joint's expenses table */
+/* Additional styles for Joint expenses table */
 #joint-table {
   margin-top: 40px;
-  border: 1px solid #FFC733;
+  border: 1px solid #ddd;
 }
 
 #joint-table th {
@@ -130,8 +130,8 @@ table tbody tr:hover {
 
 #joint-table tbody tr:hover {
   background-color: #ffedc6;
-  transform: scale(1.01);
-  transition: background-color 0.2s, transform 0.2s;
+  transform: none; /* Reset hover effect */
+  transition: none; /* Disable hover effect transition */
 }
 
 /* Styles for displaying who owes whom */
@@ -146,4 +146,16 @@ table tbody tr:hover {
 
 .who-owes p {
   margin: 5px 0;
+}
+
+/* Prevent browsers from applying default input styles */
+input:focus {
+  outline: none; /* Remove the focus outline */
+}
+
+/* Reset any automatic hover effects on table rows */
+tr:hover {
+  background-color: transparent;
+  transform: none;
+  transition: none;
 }
