@@ -134,8 +134,8 @@
     <p>Joint's Total Balance: {{ joint_balance }} BZD</p>
     <p v-if="neo_owes_trinity > 0">From Neo's total balance, he owes Trinity: {{ neo_owes_trinity }} BZD</p>
     <p v-if="trinity_owes_neo > 0">From Trinity's total balance, she owes Neo: {{ trinity_owes_neo }} BZD</p>
-    <p v-if="trinity_pays_for_joint > 0">Joint owes Trinity: {{ trinity_pays_for_joint }} BZD</p>
-    <p v-if="neo_pays_for_joint > 0">Joint owes Neo: {{ neo_pays_for_joint }} BZD</p>
+    <p v-if="trinity_pays_for_joint > 0">From Joint's total balance, joint owes Trinity: {{ trinity_pays_for_joint }} BZD</p>
+    <p v-if="neo_pays_for_joint > 0">From Joint's total balance, joint owes Neo: {{ neo_pays_for_joint }} BZD</p>
   </div>
     
     </div>
