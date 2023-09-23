@@ -1,3 +1,9 @@
+/*
+CMPS3141-HCI - AS3-23S1
+Collaborators:Francisco Tun (2020152662)
+Date: Sept.22.23
+*/
+
 import { createApp } from "https://mavue.mavo.io/mavue.js";
 
 globalThis.app = createApp({
